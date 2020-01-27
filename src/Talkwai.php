@@ -1,5 +1,5 @@
 <?php
-namespace talkwaiapi;
+namespace thisisdevel\talkwaiapi;
 
 use GuzzleHttp\Client;
 
