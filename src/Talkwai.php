@@ -1,11 +1,11 @@
 <?php
-namespace thisisdevel\talkwaiapi;
+namespace itsdevel\talkwaiapi;
 
 use GuzzleHttp\Client;
 
 class Talkwai
 {
-    const BASE_URI = 'https://www.talkwai.com/hub/api';
+    const BASE_URI = 'https://api.talkwai.com/v1/query';
     const TIMEOUT = 3.0;
 
     private static $client_key;
