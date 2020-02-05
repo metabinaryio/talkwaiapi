@@ -17,17 +17,23 @@ class Talkwai
         self::$developer_secret = $secret;
     }
 
-    public function query($query)
+    public function query($query, $json = false)
     {
         $client = new Client([
-            'base_uri' => self::BASE_URI,
-            'timeout'  => self::TIMEOUT,
+            'timeout'  => self::TIMEOUT
         ]);
 
-        $response = $client->request('GET', '?client_key='.self::$client_key.'&developer_secret='.self::$developer_secret.'&query='.$query);
-        $body = $response->getBody();
-        $data = json_decode($body, true);
+        $response = $client->request('POST', self::BASE_URI, [
+            'form_params' => [
+                'client_key' => self::$client_key,
+                'developer_secret' => self::$developer_secret,
+                'query' => $query
+            ]
+        ]);
 
-        return $data['result']['response']['text']??'';
+        $body = $response->getBody();
+        $data = json_decode($body);
+
+        return $json == true ? $body : $data->result->response->text ?? $body;
     }
 }
